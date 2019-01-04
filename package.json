@@ -1,5 +1,5 @@
 {
-  "name": "activeUsersInChannel",
+  "name": "active-users-in-channel",
   "version": "0.0.1",
   "description": "",
   "main": "server.js",
