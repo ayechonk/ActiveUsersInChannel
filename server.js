@@ -1,14 +1,14 @@
 require('dotenv').config();
-const Discord = require('discord.js')
-const client = new Discord.Client()
-const roster = []
+let Discord = require('discord.js')
+let client = new Discord.Client()
+let roster = []
 
 
-const getMemberFromRoster = memberId => {
-	var currentMember = null;
-	const numOfAttended = roster.length
-	for (var i = 0; i < numOfAttended; i++) {
-		const currentRosterMember = roster[i]
+let getMemberFromRoster = memberId => {
+	let currentMember = null;
+	let numOfAttended = roster.length
+	for (let i = 0; i < numOfAttended; i++) {
+		let currentRosterMember = roster[i]
 		if (currentRosterMember.id === memberId) {
 			currentMember = currentRosterMember
 			break;
@@ -17,13 +17,13 @@ const getMemberFromRoster = memberId => {
 	return currentMember
 }
 
-const updateToRoster = member => {
+let updateToRoster = member => {
 	if (member !== null) {
 		member.lastAttendance = Date.now()
 	}
 }
 
-const pushToRoster = memberId => {
+let pushToRoster = memberId => {
 	roster.push({
 		"id": memberId,
 		"lastAttendance": Date.now()
@@ -32,7 +32,7 @@ const pushToRoster = memberId => {
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
 	if (newMember.voiceChannelID !== null) {
-		const member = getMemberFromRoster(newMember.user.id)
+		let member = getMemberFromRoster(newMember.user.id)
 		if (member === null) {
 			pushToRoster(newMember.user.id)
 		} else {
@@ -47,10 +47,10 @@ client.on('message', msg => {
 			roster = [];
 			msg.reply('Users have been cleared')
 		} else if (msg.content === 'roster') {
-			const usersString = JSON.stringify(roster)
+			let usersString = JSON.stringify(roster)
 			msg.reply(usersString)
 		} else {
-			const member = getMemberFromRoster(client.user.id)
+			let member = getMemberFromRoster(client.user.id)
 			if (member === null) {
 				pushToRoster(msg.author.id)
 			} else {
