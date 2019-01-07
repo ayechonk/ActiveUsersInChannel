@@ -60,7 +60,7 @@ module.exports = function(client) {
 			}
 			let addRole = false;
 			let lastActivity = this.roster.get(guildMember.id);
-			if ((typeof lastActivity === 'undefined' || differenceInDays(Date.now(), lastActivity) >= 60) && typeof guildMember.roles.get(this.absenteeRole.id) === 'undefined') {
+			if ((typeof lastActivity === 'undefined' || differenceInDays(Date.now(), lastActivity) >= 7) && typeof guildMember.roles.get(this.absenteeRole.id) === 'undefined') {
 				addRole = true;
 			}
 			if (addRole) {
