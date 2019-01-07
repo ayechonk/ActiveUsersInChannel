@@ -1,6 +1,5 @@
 require('dotenv').config();
 let differenceInDays = require('date-fns/difference_in_days/index.js');
-differenceInDays = require('date-fns/difference_in_seconds/index.js');
 
 module.exports = function(client) {
 	/*VARIABLES*/
