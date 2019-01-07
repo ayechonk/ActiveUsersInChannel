@@ -24,13 +24,18 @@ module.exports = function(client) {
 			msg.reply(JSON.stringify(this.roster));
 		}
 		else if (msg.content === 'roles') {
-			// msg.reply(JSON.stringify(this.client.guilds));
-			msg.reply(JSON.stringify(this.client.guilds.first().roles.find("name", "buttsniffer").members));
-			// let guild = this.client.guilds.first();
-			// let mapRoles = guild.roles;
-			// for (let [key, role] of mapRoles) {
-			// 	console.log(role);
-			// }
+			let absenteeRole = this.client.guilds.first().roles.find( r => r.name === "absentees");
+			let mapOfButtSniffers = this.client.guilds.first().roles.find(r => r.name === "buttsniffer").members;
+			let arrOfButtSniffers = [];
+			let arrOfButtSniffersIds = [];
+			for (let [key, guildMember] of mapOfButtSniffers) {
+				let useThisName = guildMember.nickname === null?guildMember.user.username:guildMember.nickname;
+				arrOfButtSniffers.push(useThisName);
+				arrOfButtSniffersIds.push(key);
+				// guildMember.addRole(absenteeRole).then(gm => console.log(absenteeRole.name + " has been added to " + useThisName));
+			}
+			console.log(JSON.stringify(arrOfButtSniffers));
+			console.log(JSON.stringify(arrOfButtSniffersIds));
 		}
 		else {
 			let memberId = msg.author.id;
