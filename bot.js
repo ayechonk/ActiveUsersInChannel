@@ -13,9 +13,7 @@ module.exports = function(client) {
 		this.updateRoster(newMember.user.id);
 	});
 	this.client.on('message', msg => {
-		if (!msg.author.bot && (msg.content.startsWith('\'\'') || msg.content.startsWith('!!') || msg.content.startsWith('6969420'))) {
-			this.consumeMessage(msg);
-		}
+		this.consumeMessage(msg);
 	});
 
 	/*TIMERS*/
@@ -34,18 +32,26 @@ module.exports = function(client) {
 		}
 	};
 	this.consumeMessage = (msg) => {
-		if (msg.content === 'roster') {
-			let arr = [];
-			for (let [key, lastActivityDate] of this.roster) {
-				let guildMember = this.nky.members.get(key);
-				if (typeof guildMember !== 'undefined') {
-					arr.push({name: guildMember.user.username, date: lastActivityDate});
+		let activate = ['\'\'', '!!', '6969420'].map(val => {
+			return msg.content.startsWith(val);
+		}).includes(true);
+		if (!msg.author.bot && activate) {
+
+			if (msg.content.includes('roster')) {
+				let arr = [];
+				for (let [key, lastActivityDate] of this.roster) {
+					let guildMember = this.nky.members.get(key);
+					if (typeof guildMember !== 'undefined') {
+						arr.push({
+							name: guildMember.user.username,
+							date: lastActivityDate
+						});
+					}
 				}
+				msg.reply(JSON.stringify(arr));
+			} else {
+				this.updateRoster(msg.author.id);
 			}
-			msg.reply(JSON.stringify(arr));
-		}
-		else {
-			this.updateRoster(msg.author.id);
 		}
 	};
 	this.runRoster = () => {

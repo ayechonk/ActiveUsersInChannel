@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node %NODE_DEBUG_OPTION% server.js"
+    "start": "node server.js",
+    "debug": "node %NODE_DEBUG_OPTION% server.js"
   },
   "dependencies": {
     "date-fns": "^1.30.1",
