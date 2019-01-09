@@ -34,11 +34,7 @@ module.exports = function(client) {
 		}
 	};
 	this.consumeMessage = (msg) => {
-		if (msg.content === 'clear') {
-			this.clearRoster();
-			msg.reply('Users have been cleared');
-		}
-		else if (msg.content === 'roster') {
+		if (msg.content === 'roster') {
 			let arr = [];
 			for (let [key, lastActivityDate] of this.roster) {
 				let guildMember = this.nky.members.get(key);
