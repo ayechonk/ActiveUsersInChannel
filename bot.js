@@ -13,7 +13,7 @@ module.exports = function(client) {
 		this.updateRoster(newMember.user.id);
 	});
 	this.client.on('message', msg => {
-		if (!msg.author.bot) {
+		if (!msg.author.bot && (msg.content.startsWith('\'\'') || msg.content.startsWith('!!') || msg.content.startsWith('6969420'))) {
 			this.consumeMessage(msg);
 		}
 	});
