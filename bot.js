@@ -35,22 +35,23 @@ module.exports = function(client) {
 		let activate = ['\'\'', '!!', '6969420'].map(val => {
 			return msg.content.startsWith(val);
 		}).includes(true);
-		if (!msg.author.bot && activate) {
-			if (msg.content.includes('roster')) {
-				let arr = [];
-				for (let [key, lastActivityDate] of this.roster) {
-					let guildMember = this.nky.members.get(key);
-					if (typeof guildMember !== 'undefined') {
-						arr.push({
-							name: guildMember.user.username,
-							date: lastActivityDate
-						});
-					}
-				}
-				msg.reply(JSON.stringify(arr));
-			}
-		} else {
+		if (!msg.author.bot) {
 			this.updateRoster(msg.author.id);
+			if (activate) {
+				if (msg.content.includes('roster')) {
+					let arr = [];
+					for (let [key, lastActivityDate] of this.roster) {
+						let guildMember = this.nky.members.get(key);
+						if (typeof guildMember !== 'undefined') {
+							arr.push({
+								name: guildMember.user.username,
+								date: lastActivityDate
+							});
+						}
+					}
+					msg.reply(JSON.stringify(arr));
+				}
+			}
 		}
 	};
 	this.runRoster = () => {
