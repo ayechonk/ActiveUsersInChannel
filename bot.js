@@ -36,7 +36,6 @@ module.exports = function(client) {
 			return msg.content.startsWith(val);
 		}).includes(true);
 		if (!msg.author.bot && activate) {
-
 			if (msg.content.includes('roster')) {
 				let arr = [];
 				for (let [key, lastActivityDate] of this.roster) {
@@ -49,9 +48,9 @@ module.exports = function(client) {
 					}
 				}
 				msg.reply(JSON.stringify(arr));
-			} else {
-				this.updateRoster(msg.author.id);
 			}
+		} else {
+			this.updateRoster(msg.author.id);
 		}
 	};
 	this.runRoster = () => {
